@@ -1,5 +1,5 @@
 #Guide 
-
+-------------------------Option 1 et 2-----------------------------------------------------------
 #Telecharger kafka kafka-3.4.0-src.tgz (asc, sha512) 
 
 https://kafka.apache.org/downloads 
@@ -30,3 +30,4 @@ bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 #Lancez le programme et attendez
 #Le programme principale(main) se trouve dans le Convertisseur.java 
 
+-------------------------Option 3-----------------------------------------------------------

@@ -9,7 +9,6 @@ import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
-
 import java.util.Properties;
 
 
@@ -17,6 +16,19 @@ public class Consommateur {
     private static final String BOOTSTRAP_SERVERS = "localhost:9092";
     private static final String C_TO_F_TOPIC = "Temperature-Celsius";
     private static final String F_TO_K_TOPIC = "Temperature-Fahrenheit";
+
+
+    private long startTime = System.currentTimeMillis() + 5000;
+    private long endTime, executionTime;
+    private static double temperature;
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    private static synchronized void setTemperature(double nbrtmpParams) {
+        temperature = nbrtmpParams;
+    }
 
     // Méthode pour démarrer les consommateurs de température Fahrenheit
     public static void startConsumers() {
@@ -60,6 +72,7 @@ public class Consommateur {
 
                     // Affichage de la température en Celsius et en Fahrenheit
                     System.out.println("Temperature en Celsius: " + temperatureCelsius + " | Temperature en Fahrenheit: " + temperatureFahrenheit);
+                    setTemperature(temperatureFahrenheit);
                 }
             }
         });
@@ -87,4 +100,5 @@ public class Consommateur {
         consumer1Thread.start();
         consumer2Thread.start();
     }
+
 }

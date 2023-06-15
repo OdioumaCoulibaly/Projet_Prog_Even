@@ -1,7 +1,5 @@
 package org.example;
 
-import io.prometheus.client.Gauge;
-
 import java.io.IOException;
 
 
@@ -17,6 +15,7 @@ public class Main {
         Consommateur consommateur = new Consommateur();
         consommateur.startConsumers();
 
-        Prometheus.metrics();
+        PrometheusCons.metrics();
+
     }
 }

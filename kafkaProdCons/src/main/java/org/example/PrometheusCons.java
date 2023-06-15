@@ -3,7 +3,6 @@ package org.example;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import io.micrometer.core.instrument.Counter;
 import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 import io.prometheus.client.Gauge;
@@ -12,11 +11,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 
-public class Prometheus {
+public class PrometheusCons {
 
     public static void metrics() throws IOException {
 
         Producteur producteur = new Producteur();
+        Consommateur consommateur = new Consommateur();
 
         // Créer un registre pour stocker les métriques Prometheus en dehors de la boucle
         PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
@@ -27,10 +27,16 @@ public class Prometheus {
                 .help("Nombre total de productions")
                 .register(registry.getPrometheusRegistry());
 
+        // Créer une métrique de type Gauge pour tmp en Fahrenheit
+        Gauge variableGaugeTemp = Gauge.build()
+                .name("temperature_en_fahrenheit")
+                .help("Temperature en Fahrenheit")
+                .register(registry.getPrometheusRegistry());
+
         // Configurer le serveur HTTP pour exposer les métriques en dehors de la boucle
         int port = 8888;
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/metrics", new MetricsHandler(registry));
+        server.createContext("/metricsprod", new MetricsHandler(registry));
         server.start();
 
         // Boucle infinie pour mettre à jour la valeur du Gauge
@@ -39,7 +45,8 @@ public class Prometheus {
             variableGauge.set(value);
             producteur.incrementNbrProduction(variableGauge);
 
-
+            double valueTemp = consommateur.getTemperature();
+            variableGaugeTemp.set(valueTemp);
 
             try {
                 Thread.sleep(1000);
@@ -48,7 +55,6 @@ public class Prometheus {
             }
         }
     }
-
 
     static class MetricsHandler implements HttpHandler {
         private final PrometheusMeterRegistry registry;

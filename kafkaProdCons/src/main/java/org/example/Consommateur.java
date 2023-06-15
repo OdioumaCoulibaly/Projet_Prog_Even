@@ -12,6 +12,7 @@ import org.apache.kafka.streams.kstream.KStream;
 
 import java.util.Properties;
 
+
 public class Consommateur {
     private static final String BOOTSTRAP_SERVERS = "localhost:9092";
     private static final String C_TO_F_TOPIC = "Temperature-Celsius";

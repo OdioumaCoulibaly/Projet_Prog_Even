@@ -1,23 +1,24 @@
 # my global config
 global:
-  scrape_interval: 15s
+  scrape_interval: 10s
 
-#  external_labels:
-#	monitor: 'codelab-monitor'
-
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
 scrape_configs:
 
-  - job_name: "prometheus"
+  - job_name: prometheus
     scrape_interval: 5s
     static_configs:
-      - targets: ["localhost:9090"]
+      - targets: [localhost:9090]
 
-  - job_name: 'spring'
-    metrics_path: '/actuator/prometheus'
-    scrape_interval: 5s
+  - job_name: 'java_application'
+    metrics_path: '/metricsprod'
+    scrape_interval: 2s
     static_configs:
-      - targets: ['localhost:8080']    
+      - targets: ['localhost:8888']
+
+#  - job_name: 'java_application_temp'
+#    metrics_path: '/temperature'
+#    scrape_interval: 2s
+#    static_configs:
+#      - targets: ['localhost:8888']
 #EOF
 

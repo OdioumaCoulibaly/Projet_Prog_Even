@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class Producteur {
 
-    private int nbrProduction = 0;
     private static final String BOOTSTRAP_SERVERS = "localhost:9092";
     private static final String C_TO_F_TOPIC = "Temperature-Celsius";
 

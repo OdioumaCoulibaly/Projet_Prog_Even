@@ -15,7 +15,6 @@ public class PrometheusCons {
 
     public static void metrics() throws IOException {
 
-        Producteur producteur = new Producteur();
         Consommateur consommateur = new Consommateur();
 
         // Créer un registre pour stocker les métriques Prometheus en dehors de la boucle
@@ -57,18 +56,30 @@ public class PrometheusCons {
         }
     }
 
+    // Classe MetricsHandler qui implémente l'interface HttpHandler
     static class MetricsHandler implements HttpHandler {
         private final PrometheusMeterRegistry registry;
 
+        // Constructeur qui prend une instance de PrometheusMeterRegistry en paramètre
         public MetricsHandler(PrometheusMeterRegistry registry) {
             this.registry = registry;
         }
 
+        // Méthode handle() qui gère les requêtes HTTP
         @Override
         public void handle(HttpExchange exchange) throws IOException {
+
+            // Obtenir les métriques sous forme de chaîne de caractères
             String response = registry.scrape();
+
+            // Définir le type de contenu de la réponse comme texte brut au format Prometheus
             exchange.getResponseHeaders().set("Content-Type", "text/plain; version=0.0.4; charset=utf-8");
+
+            // Envoyer la réponse HTTP avec le code de statut 200 (OK)
+            // et la longueur de la réponse en octets
             exchange.sendResponseHeaders(200, response.getBytes().length);
+
+            // Écrire la réponse dans le corps de la réponse HTTP
             try (OutputStream os = exchange.getResponseBody()) {
                 os.write(response.getBytes());
             }

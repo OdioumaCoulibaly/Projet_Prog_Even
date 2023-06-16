@@ -12,13 +12,6 @@ public class Producteur {
     private static final String BOOTSTRAP_SERVERS = "localhost:9092";
     private static final String C_TO_F_TOPIC = "Temperature-Celsius";
 
-    private long startTime = System.currentTimeMillis() + 5000;
-    private long endTime, executionTime;
-
-    public int getNbrProduction() {
-        return nbrProduction;
-    }
-
     public void startProcteurs() {
         // Producteur 1
         Thread producer1Thread = new Thread(() -> {
@@ -43,7 +36,7 @@ public class Producteur {
                 producer.send(record);
 
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -77,18 +70,4 @@ public class Producteur {
         producer1Thread.start();
         producer2Thread.start();
     }
-
-    private synchronized void setNbrProduction(int nbrProductionParams) {
-        nbrProduction = nbrProductionParams;
-    }
-    synchronized void incrementNbrProduction(Gauge variableGauge) {
-        nbrProduction++;
-        variableGauge.set(nbrProduction);
-
-        if (startTime < System.currentTimeMillis()) {
-            setNbrProduction(0);
-            startTime = System.currentTimeMillis() + 5000;
-        }
-    }
-
 }

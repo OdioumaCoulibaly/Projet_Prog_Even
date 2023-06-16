@@ -23,8 +23,8 @@ public class PrometheusCons {
 
         // Créer une métrique de type Gauge pour le nombre de productions
         Gauge variableGauge = Gauge.build()
-                .name("nombre_de_production")
-                .help("Nombre total de productions")
+                .name("temperature_en_celcus")
+                .help("Temperature en celcus")
                 .register(registry.getPrometheusRegistry());
 
         // Créer une métrique de type Gauge pour tmp en Fahrenheit
@@ -41,9 +41,10 @@ public class PrometheusCons {
 
         // Boucle infinie pour mettre à jour la valeur du Gauge
         while (true) {
-            int value = producteur.getNbrProduction();
+
+            //producteur.incrementNbrProduction(variableGauge);
+            double value = consommateur.getCelcus();
             variableGauge.set(value);
-            producteur.incrementNbrProduction(variableGauge);
 
             double valueTemp = consommateur.getTemperature();
             variableGaugeTemp.set(valueTemp);

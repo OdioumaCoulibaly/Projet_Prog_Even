@@ -18,8 +18,6 @@ public class Consommateur {
     private static final String F_TO_K_TOPIC = "Temperature-Fahrenheit";
 
 
-    private long startTime = System.currentTimeMillis() + 5000;
-    private long endTime, executionTime;
     private static double temperature;
 
     public double getTemperature() {
@@ -30,6 +28,16 @@ public class Consommateur {
         temperature = nbrtmpParams;
     }
 
+
+    private static double Celcus;
+
+    public double getCelcus() {
+        return Celcus;
+    }
+
+    private static synchronized void setCelus(double celusParam) {
+        Celcus = celusParam;
+    }
     // Méthode pour démarrer les consommateurs de température Fahrenheit
     public static void startConsumers() {
         // Consommateur 1
@@ -73,6 +81,7 @@ public class Consommateur {
                     // Affichage de la température en Celsius et en Fahrenheit
                     System.out.println("Temperature en Celsius: " + temperatureCelsius + " | Temperature en Fahrenheit: " + temperatureFahrenheit);
                     setTemperature(temperatureFahrenheit);
+                    setCelus(temperatureCelsius);
                 }
             }
         });

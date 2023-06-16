@@ -15,7 +15,6 @@ public class PrometheusCons {
 
     public static void metrics() throws IOException {
 
-        Producteur producteur = new Producteur();
         Consommateur consommateur = new Consommateur();
 
         // Créer un registre pour stocker les métriques Prometheus en dehors de la boucle

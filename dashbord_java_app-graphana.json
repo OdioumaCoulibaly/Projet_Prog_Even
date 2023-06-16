@@ -76,13 +76,13 @@
             "uid": "dfb8184f-6245-4c94-b02c-df77c6e32520"
           },
           "editorMode": "builder",
-          "expr": "nombre_de_production",
+          "expr": "temperature_en_celcus",
           "instant": false,
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Nombre Total de Poduction",
+      "title": "Temperature en Celcuis",
       "type": "gauge"
     },
     {
@@ -231,13 +231,13 @@
             "uid": "dfb8184f-6245-4c94-b02c-df77c6e32520"
           },
           "editorMode": "builder",
-          "expr": "nombre_de_production",
+          "expr": "temperature_en_celcus",
           "instant": false,
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Nombre de production m2",
+      "title": "Temperature en Celcuis m2",
       "type": "timeseries"
     },
     {
@@ -348,6 +348,6 @@
   "timezone": "",
   "title": "dashbord_java_app",
   "uid": "fe1a9261-888a-4c8f-b4a0-547513bc8f79",
-  "version": 14,
+  "version": 16,
   "weekStart": ""
 }

@@ -24,7 +24,7 @@ public class Consommateur {
         return temperature;
     }
 
-    private static synchronized void setTemperature(double nbrtmpParams) {
+    private static void setTemperature(double nbrtmpParams) {
         temperature = nbrtmpParams;
     }
 
@@ -35,7 +35,7 @@ public class Consommateur {
         return Celcus;
     }
 
-    private static synchronized void setCelus(double celusParam) {
+    private static void setCelus(double celusParam) {
         Celcus = celusParam;
     }
     // Méthode pour démarrer les consommateurs de température Fahrenheit

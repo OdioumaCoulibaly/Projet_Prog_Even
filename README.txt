@@ -1,4 +1,4 @@
-Guide
+Guide----------------------------------------------------
 
 Outils utilisés :  
  
@@ -46,7 +46,7 @@ Accéder à Prometheus via : http://127.0.0.1:9090/
 
 Dans l'interface de Prometheus, ajouter les graphiques suivants : 
 
-- nombre_de_production 
+- temperature_en_celcus  
 - temperature_en_fahrenheit 
 
 Télécharger Grafana pour Debian et Ubuntu depuis la source : 
